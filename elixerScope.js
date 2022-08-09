@@ -1,7 +1,6 @@
-<html>
-    <title>Elixer Scope CHain</title>
-<body>
-    <script>
+/*
+Elixer Scope CHain
+*/
 
     //c is in lexical envirment of a and g is in lexical envirment of global execution context.
     // so c can access variable from global and a function.
@@ -18,8 +17,3 @@
     }
     a();
     console.log(b); //not works as this console is out of lexical env of a and c  it 
-
-    </script>
-</body>
-
-</html>
