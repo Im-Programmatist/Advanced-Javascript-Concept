@@ -1,0 +1,160 @@
+<html>
+    <title>Bubbling and Capturing</title>
+    <head>
+        
+        <style>
+            body form {
+              margin: 10px;
+              border: 1px solid blue;
+            }
+            body form div {
+              margin: 10px;
+              border: 1px solid blue;
+            }
+            body form div p {
+              margin: 10px;
+              border: 1px solid blue;
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <p>
+            The standard DOM Events describes 3 phases of event propagation:
+            <li>Capturing phase – the event goes down to the element.</li>        
+            <li>Target phase – the event reached the target element.</li>        
+            <li>Bubbling phase – the event bubbles up from the element.</li>
+        </p>
+        <p>
+            <b>* Bubbling ---></b>
+            * When an event happens on an element, it first runs the handlers on it, then on its parent, 
+                then all the way up on other ancestors.
+            * The process is called “bubbling”, because events “bubble” from the inner element up 
+            through parents like a bubble in the water.
+        </p>
+        <p>
+            elem.addEventListener("click", e => alert(`Capturing: ${elem.tagName}`), true);
+        </p>
+        <p>
+            Bubbling can enable using third param to eventListener is - false<br/>
+            Capturing can enable using third param to eventListener is - true  {capture: true}
+        </p>
+        <p>
+            <b>* Capturing/trickeling - ----></b>
+            Event propagate from ancestors to target element. opposite of bubbling 
+        </p>
+        <p>
+            <b><i>bubbling goes bottom to top</i></b><br/>
+            <b><i>capturing goes top to bottom</i></b>
+        </p>
+        <p>
+            Stop Bubbling using - The method for it is event.stopPropagation().
+        </p>
+
+        <p>
+           Bubbling from the target and and trickeling/capturing happends till the target.
+        </p>
+          
+        <form id="frm">FORM
+            <div id="dv">DIV
+                <p id="p">P</p>
+            </div>
+        </form>
+        
+        <form id="frm1">FORM
+            <div id="dv1">DIV
+                <p id="p1">P</p>
+            </div>
+        </form>
+
+        <form id="frm2">FORM
+            <div id="dv2">DIV
+                <p id="p2">P</p>
+            </div>
+        </form>
+
+        <script>
+            /*Bubbling can enable using third param to eventListener is - false*/
+            /*Capturing can enable using third param to eventListener is - true  {capture: true}*/
+            for(let elem of document.querySelectorAll('*')) {
+              elem.addEventListener("click", e => alert(`Capturing: ${elem.tagName}`), true);
+              elem.addEventListener("click", e => alert(`Bubbling: ${elem.tagName}`));
+            }
+            /*
+            Note the differences from this (=event.currentTarget):
+            event.target – is the “target” element that initiated the event, it doesn’t change through the bubbling process.
+            this – is the “current” element, the one that has a currently running handler on it.
+
+            In form.onclick handler:
+            this (=event.currentTarget) is the <form> element, because the handler runs on it.
+            event.target is the actual element inside the form that was clicked.
+
+            */
+            //above example will alert first caturing then bubbling events
+
+            //We can crontrol our event propogation using true/false of third param of event handler
+            document.querySelector('#frm').addEventListener('click', ()=>{
+                console.log("Grandparent element - form clicked");
+            },{capture:true}) //Capturing start
+
+            document.querySelector('#dv').addEventListener('click', ()=>{
+                console.log("Parent element - div clicked");
+            },false) //Bubbling start
+
+            document.querySelector('#p').addEventListener('click', ()=>{
+                console.log("Child element - p clicked");
+            },true) //Capturing start
+
+            /**
+             * Output of above  -> 
+             * 1. If we click on Child P 
+             * ---> Grandparent
+             * ---> Child
+             * ---> Parent
+             * Because grandparent is in capturing mod so it prints but parent not in capturing, it has not print value
+             * As child is in capture mode then child get clicked.
+             * As soon as child get clicked parent is in bubbling it get printed last
+            */
+            
+            /**
+             * Stop Propagation - Bubbling
+             */
+            document.querySelector('#frm1').addEventListener('click', (e)=>{
+                console.log("Grandparent element - form clicked");
+            },false) //Bubbling start
+
+            document.querySelector('#dv1').addEventListener('click', (e)=>{
+                console.log("Parent element - div clicked");
+                event.stopPropagation()
+            },false) //Bubbling start
+
+            document.querySelector('#p1').addEventListener('click', (e)=>{
+                console.log("Child element - p clicked");
+            },false) //Bubbling start
+
+            //In output only clicked element will print till it reach out to the e.stopPropagation() element
+            //Here, if clicked on child then bubbling happens on chind and parent not grandparent 
+            //if clicked on parent then only parent prints
+            //Same for capturing
+
+             /**
+             * Stop Propagation - Bubbling
+             */
+             document.querySelector('#frm2').addEventListener('click', (e)=>{
+                console.log("Grandparent element - form clicked");
+            },true) //Capturing start
+
+            document.querySelector('#dv2').addEventListener('click', (e)=>{
+                console.log("Parent element - div clicked");
+                event.stopPropagation()
+            },true) //Capturing start
+
+            document.querySelector('#p2').addEventListener('click', (e)=>{
+                console.log("Child element - p clicked");
+            },true) //Capturing start
+
+        </script>
+    </body>
+
+</html>

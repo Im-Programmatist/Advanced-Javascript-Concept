@@ -46,6 +46,9 @@ const values = Array.prototype.map.call(elems, ({ value }) => value);
  * If this conditional returns true, the element gets pushed to the output array. 
  * If the condition returns false, the element does not get pushed to the output array.
  * parameter re same as map only element is requeired
+ * let newArray = arr.filter(callback(currentValue[, index[, array]]) {
+  // return element for newArray, if true
+}[, thisArg]);
  */
  const numbers3 = [1, 2, 3, 4];
  const evens = numbers3.filter(item => item % 2 === 0);
@@ -66,7 +69,11 @@ const values = Array.prototype.map.call(elems, ({ value }) => value);
  * The reduce() method reduces an array of values down to just one value. 
  * To get the output value, it runs a reducer function on each element of the array.
 Syntax
-arr.reduce(callback[, initialValue])
+arr.reduce(callback[, initialValue]); OR
+let newArray = arr.filter(callback(currentValue, accumulatedValue) {
+  // return the accumulated value, given the current and previous  accumulated value
+}, initialValue[, thisArg]);
+
 The callback argument is a function that will be called once for every item in the array. 
 This function takes four arguments, but often only the first two are used.
 
