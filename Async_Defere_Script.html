@@ -1,0 +1,46 @@
+<!-- The defer attribute tells the browser not to wait for the script. 
+Instead, the browser will continue to process the HTML, build DOM. 
+The script loads “in the background”, and then runs when the DOM is fully built. -->
+
+<!-- In other words:
+
+Scripts with defer never block the page.
+Scripts with defer always execute when the DOM is ready (but before DOMContentLoaded event). -->
+
+<p>...content before scripts...</p>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => alert("DOM ready after defer!"));
+</script>
+
+<script defer src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script>
+
+<p>...content after scripts...</p>
+
+<!-- The page content shows up immediately.
+DOMContentLoaded event handler waits for the deferred script. It only triggers when the script is downloaded and executed. -->
+
+<!-- 
+***** The async attribute is somewhat like defer. 
+It also makes the script non-blocking. But it has important differences in the behavior. -->
+<!--In other words, async scripts load in the background and run when ready. The DOM and other scripts don’t wait for them, and they don’t wait for anything. A fully independent script that runs when loaded. -->
+
+<p>...content before scripts...</p>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => alert("DOM ready!"));
+</script>
+
+<script async src="https://javascript.info/article/script-async-defer/long.js"></script>
+<script async src="https://javascript.info/article/script-async-defer/small.js"></script>
+
+<p>...content after scripts...</p>
+
+<!-- Dynamic scripts
+There’s one more important way of adding a script to the page.
+We can create a script and append it to the document dynamically using JavaScript: -->
+<script>
+let script = document.createElement('script');
+script.src = "/article/script-async-defer/long.js";
+document.body.append(script); // (*)
+</script>
