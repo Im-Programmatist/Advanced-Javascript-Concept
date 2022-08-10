@@ -2,6 +2,7 @@
  * Polyfilling & Transpiling
  * We can add new function or property to built in prototype called polifilling
  * We wil use The Prototypal Inheritance for polifill explanation.
+ * We can create our own bind function (if not aware of bind function please check Borrowing FUnction Topic in project)
  */
 
 /**

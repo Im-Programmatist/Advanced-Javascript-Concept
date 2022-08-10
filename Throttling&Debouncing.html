@@ -1,0 +1,236 @@
+<html>
+    <title>Throttling & Debouncing</title>
+    <style>
+        body {
+            margin: 0;
+            text-align: center;
+            background: linear-gradient(200deg, #b7b7b7, #f4df4f, #7a6f27 );
+            background-size: 300% 300%;
+            -webkit-animation: movebg 10s ease infinite;
+            -moz-animation: movebg 10s ease infinite;
+            -o-animation: movebg 10s ease infinite;
+            animation: movebg 10s ease infinite;
+        }
+
+        input {
+            font: inherit;
+        }
+
+        main {
+            height: 500vh;
+        }
+
+        .count {
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        height: max-content;
+        font-family: system-ui, Roboto, Arial, sans-serif;
+        font-size: 1.4em;
+        line-height: 1.6;
+        color: #242424;
+        }
+
+        @keyframes movebg {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+        }
+    </style>
+    <body>
+        <div>
+            <p>
+                <span style="color:red"><b>Throttling</b></span> - 
+                is a technique where we make the function call in a predetermined time interval irrespective of continuous user actions.
+            </p>
+            <p>
+                <span style="color:red"><b>Debouncing</b></span> -  
+                is a technique where we can monitor the time delay of user action and once that delay reaches our predetermined threshold we can can make the function call.
+            </p>
+            <p>
+                The major difference between debouncing and throttling is that debounce calls a function when a user hasn’t carried out an event in a specific amount of time, while throttle calls a function at intervals of a specified amount of time while the user is carrying out an event. 
+            </p>
+            <p>
+                <b>
+                    use-cases. It’s not recommended to use throttling logic in search bar and we we cannot use debouncing in shooting game scenario or browser resizing or onScroll events.
+                </b>
+            </p>
+            <p>
+                The major difference between debouncing and throttling is that debounce calls a function when a user hasn’t carried out an event in a specific amount of time, while throttle calls a function at intervals of a specified amount of time while the user is carrying out an event. 
+            </p>
+            <p>
+                <span style="color:red"><b><i>Debouncing take last click & trottle take first click , then goes in ideal state</i></b></span><b></b>
+                <br/>
+                <span style="color:red"><b><i>This concept is used in search bar where api get called many time </i></b></span>
+            </p>
+        </div>
+        <div>
+            <button type="button" id="debounceBtn">Click Debounce - From last click 3 sec timer</button><br/>
+            <button type="button" id="throttleBtn">Click Tthrottle - From First click 3 sec timer</button>
+        </div>
+        <main>
+            <div class="count">
+                <div class="scroll-count">
+                  <p>
+                    Scroll event listener: <span id="scroll-count"></span>
+                  </p>
+                </div>
+                <div class="throttle-count">
+                  <p>
+                    Throttle count: <span id="throttle-count"></span> <br>
+                    <input type="range" id="throttle-range" value="250" min="50" max="2000" step="50"><br>
+                    <small>(every <span id="throttle-time">250</span>ms while user is scrolling)</small>
+                  </p>
+                </div>
+                <div class="debounce-count">
+                  <p>
+                    Debounce count: <span id="debounce-count"></span> <br>
+                    <input type="range" id="debounce-range" value="250" min="50" max="2000" step="50"><br>
+                    <small>(when user hasn't scrolled in <span id="debounce-time">250</span>ms)</small>
+                  </p>
+                </div>
+                </div>
+        </main>
+
+        <script>
+            /**
+             * Debouncing
+             */
+            //debaounce function takes function where we can put our business logic and timmer as param
+            var debounceClick = (fn, timer) =>{
+                let timeoutVar;
+                return function(...args)
+                {
+                    var today = new Date();
+                    console.log(`for debounce last clicked at - ${today.getMinutes()}:${today.getSeconds()}`);
+                    if(timeoutVar){
+                        clearInterval(timeoutVar);
+                    }
+                    timeoutVar = setTimeout(()=>{
+                        fn(...args);
+                    },timer)
+                }
+            }
+            //we are holding button click event to come in action for 2 sec 
+            
+            document.querySelector('#debounceBtn').addEventListener('click',debounceClick(e=>{
+                var today = new Date();
+                console.log(`Debouncing take last click and goes in ideal state for 3 sec - user clicked at ${today.getMinutes()}:${today.getSeconds()}`);
+            },3000));
+
+            /**
+             * Throttling
+             */
+            //trottle function takes function where we can put our business logic and timmer as param
+            var trottleClick = (fn, delay) =>{
+                let last = 0;
+                console.log('clicked out');
+                return function(...args)
+                {
+                    var today = new Date();
+                    console.log(`for trottle first clicked at - ${today.getMinutes()}:${today.getSeconds()}`);
+                    const now = new Date().getTime(); 
+                    console.log(now, last, delay,(now-last));
+                    if(now-last < delay){
+                        return;
+                    }
+                    last = now;
+                    return fn(...args);
+                }
+            }
+            //we are holding button click event to come in action for 2 sec 
+            
+            document.querySelector('#throttleBtn').addEventListener('click',trottleClick(e=>{
+                var today = new Date();
+                console.log(`Throttling take first click and goes in ideal state for 3 sec - user clicked at ${today.getMinutes()}:${today.getSeconds()}`);
+            },3000));
+
+            //Advanced example
+
+            //For example, if we debounce a scroll function with a timer of 250ms (milliseconds), 
+            //the function is only called if the user hasn’t scrolled in 250ms. 
+            //If we throttle a scroll function with a timer of 250ms, 
+            //the function is called every 250ms while the user is scrolling.
+            const scrollCountText = document.getElementById("scroll-count");
+            const throttleCountText = document.getElementById("throttle-count");
+            const debounceCountText = document.getElementById("debounce-count");
+            const debounceRange = document.getElementById("debounce-range");
+            const throttleRange = document.getElementById("throttle-range");
+            const debounceTimeText = document.getElementById("debounce-time");
+            const throttleTimeText = document.getElementById("throttle-time");
+
+
+            let scrollCount = 0;
+            let throttleCount = 0;
+            let debounceCount = 0;
+            let throttleTime = 250;
+            let debounceTime = 250;
+
+            debounceRange.addEventListener(
+            "input",
+            () => {
+                debounceTimeText.innerHTML = debounceRange.value;
+                debounceTime = debounceRange.value;
+            },
+            false
+            );
+
+            throttleRange.addEventListener(
+            "input",
+            () => {
+                throttleTimeText.innerHTML = throttleRange.value;
+                throttleTime = throttleRange.value;
+            },
+            false
+            );
+
+            let throttlePause;
+            let debounceTimer;
+
+            const throttle = (callback, time) => {
+            if (throttlePause) return;
+
+            throttlePause = true;
+            setTimeout(() => {
+                callback();
+                throttlePause = false;
+            }, time);
+            };
+
+            const debounce = (callback, time) => {
+                window.clearTimeout(debounceTimer);
+                debounceTimer = window.setTimeout(callback, time);
+            };
+
+            const updateScrollCount = () => {
+                scrollCount++;
+                scrollCountText.innerHTML = scrollCount;
+            };
+
+            const updateThrottleCount = () => {
+                throttleCount++;
+                throttleCountText.innerHTML = throttleCount;
+            };
+
+            const updateDebounceCount = () => {
+                debounceCount++;
+                debounceCountText.innerHTML = debounceCount;
+            };
+
+            window.addEventListener("scroll", () => {
+                updateScrollCount();
+                throttle(updateThrottleCount, throttleTime);
+                debounce(updateDebounceCount, debounceTime);
+            });
+        </script>
+    </body>
+</html>
