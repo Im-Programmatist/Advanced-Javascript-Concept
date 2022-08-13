@@ -3,6 +3,13 @@
 //Each will return a new array based on the result of the function.
 
 /**
+ * map creates a new array by transforming every element in an array individually. 
+ * filter creates a new array by removing elements that don't belong. 
+ * reduce , on the other hand, takes all of the elements in an array and reduces them into a single value. 
+ * Just like map and filter , reduce is defined on Array.
+*/
+
+/**
  * Map
  * The map() method is used for creating a new array from an existing one, 
  * applying a function to each one of the elements of the first array.
