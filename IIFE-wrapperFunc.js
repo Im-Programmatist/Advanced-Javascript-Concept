@@ -6,6 +6,7 @@
     (() => {
         // …
     })();
+ * Function in grouping operator will be private 
  */
 
 // If we have some initiation code that we don't need to use again, we could use the IIFE pattern.
@@ -45,3 +46,11 @@ console.log(firstAccount.doBadThings);    // undefined; this method is private
 const secondAccount = makeWithdraw(20);   // "I will do bad things with your money"
 console.log(secondAccount.withdraw(30));  // "Insufficient money"
 console.log(secondAccount.withdraw(20));  // 0
+
+/**
+ * We can call function by imediate invoking  and want to keep private
+*/
+(function(){
+  var name = "chetan";
+  console.log("function in grouping operator and invoked imediately", name);
+})();
