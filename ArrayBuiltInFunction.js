@@ -86,6 +86,23 @@ const arry1 = [1, 30, 39, 29, 10, 13];
 console.log(arry1.every(isBelowThreshold));
 // expected output: true
 
+// comparing arrays to check for equality - method 1
+const a = [1, 2, 3];
+const b = [4, 5, 6];
+const c = [1, 2, 3];
+
+function arrayEquals(a, b) {
+    return Array.isArray(a) &&
+        Array.isArray(b) &&
+        a.length === b.length &&
+        a.every((val, index) => val === b[index]);
+}
+
+arrayEquals(a, b);
+// false
+arrayEquals(a, c);
+// true
+
 /**
  * The filter() method creates a shallow copy of a portion of a given array
 */
@@ -101,8 +118,8 @@ const found = aray1.find(element => element > 10);
 const isLargeNumber = (element) => element > 13;
 console.log(aray1.findIndex(isLargeNumber));
 //work in firefox nightly, not in edge and chrome
-const foundlast = aray1.findLast((element) => element > 45);
-console.log(foundlast);
+//const foundlast = aray1.findLast((element) => element > 45);
+//console.log(foundlast);
 
 /**
  * The Array.from() static method creates a new, 
@@ -121,16 +138,16 @@ console.log(Array.from('foo'));
 
 /**
  * group()
- * works only in firefox nightly
+ * works only in firefox nightly browser
 */
-const inventory = [
-    { name: 'asparagus', type: 'vegetables', quantity: 5 },
-    { name: 'bananas',  type: 'fruit', quantity: 0 },
-    { name: 'goat', type: 'meat', quantity: 23 },
-    { name: 'cherries', type: 'fruit', quantity: 5 },
-    { name: 'fish', type: 'meat', quantity: 22 }
-];
-console.log(inventory.group(({ type }) => type));
+// const inventory = [
+//     { name: 'asparagus', type: 'vegetables', quantity: 5 },
+//     { name: 'bananas',  type: 'fruit', quantity: 0 },
+//     { name: 'goat', type: 'meat', quantity: 23 },
+//     { name: 'cherries', type: 'fruit', quantity: 5 },
+//     { name: 'fish', type: 'meat', quantity: 22 }
+// ];
+// console.log(inventory.group(({ type }) => type));
 /* Result is:
 {
   vegetables: [
@@ -205,3 +222,19 @@ const array = [1, 2, 3, 4, 5];
 // checks whether an element is even
 const even = (element) => element % 2 === 0;
 console.log(array.some(even));
+
+/**
+ * Compaire array variable with string representation
+*/
+console.warn("Compaire array variable with string representation -- ");
+var aa = [3,6,12,24]; 
+var bb = ["3","","6","12","24"];
+var cc = "3,6,12,24";
+console.log(aa==bb);//false
+console.log(aa==cc);//True -- as array aa represents as aa.toString() while compairing with string cc
+console.log(bb==cc);//false
+
+//Compaire wioth object/variable type 
+console.log(aa===bb);//false
+console.log(aa===cc);//false 
+console.log(bb===cc);//false
