@@ -12,7 +12,7 @@
  * if the browser does not have it natively
  */
 
-//We can polyfill anything usinh prototype
+//We can polyfill anything using prototype
 
 var a = [1,2,3,4,5];
 //we can apply foreach loop on array 
