@@ -19,6 +19,7 @@ var a = [1,2,3,4,5];
 a.forEach((val)=>{
     console.log("value of array in foreach - ", val);
 });
+
 //Using polyfill we can access encapsulated built in property/functions and alter it for our use 
 //Array.prototype.forEach = null
 //THis leads to error for next foreach loop - Uncaught TypeError: a.forEach is not a function
