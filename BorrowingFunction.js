@@ -18,7 +18,7 @@
             console.log(`His name is ${this.fname} ${this.lname} & he is ${age} year old`);
         }
     };
-    person1.showName(18); /*Output: His name is Chetan Patil*/
+    person1.showName(18,"",""); /*Output: His name is Chetan Patil*/
     /**
      * Object 2 - not have function so, this function is not able to call showName
      */
@@ -59,7 +59,7 @@
     var showFuncBind = person1.showName.bind({ fname: "Akshay", lname:"Korde bind method" });
     showFuncBind(24);
     //But if we pass this object function as call back function,
-    //'this' reference goes out of context foe the function and can not use valiable declare in object
+    //'this' reference goes out of context for the function and can not use valiable declare in object
     setTimeout(person1.showName, 3000); //output - His name is undefined undefined & he is undefined year old
     //to overcome this we have to bind objects with method
     let display = person1.showName.bind({fname: "set", lname:"timeout" });
