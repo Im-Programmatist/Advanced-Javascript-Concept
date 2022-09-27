@@ -63,8 +63,8 @@
     setTimeout(person1.showName, 3000); //output - His name is undefined undefined & he is undefined year old
     //to overcome this we have to bind objects with method
     let display = person1.showName.bind({fname: "set", lname:"timeout" });
-    console.log(display);
-    setTimeout(display(30),5000);
+    console.log("console display bind method - ",display);
+    //setTimeout(display(30),5000);
     
     /**
      * APPLY()
