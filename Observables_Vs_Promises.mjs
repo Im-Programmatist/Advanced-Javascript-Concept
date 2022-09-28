@@ -69,6 +69,8 @@ const testUnscb = observbls.subscribe((result)=>{
 testUnscb.unsubscribe(); //due to this unsubscription of observables, above result will not print in outputs
 
 /*apply filter map on observables*/
+//pipe() method is available on the observable created
+//every method like map reduce filter max in RxJS returns observables
 const testUnscb1 = observbls.pipe(
     filter((item) => item ==="Observables executes first time..!"), //here we can filter result
     map((item) => item+" ---Modified by filter and map"), //here we map the iterables and attached new string
