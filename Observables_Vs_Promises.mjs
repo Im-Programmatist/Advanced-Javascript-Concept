@@ -29,6 +29,7 @@ The RxJS library defines its own Observable class along with supporting methods 
 
 /**** We have to invoke observable in JavaScript*****/
 import { Observable, UnsubscriptionError } from 'rxjs';
+import { map, reduce, filter } from 'rxjs/operators';  
 
 /*Promise*/
 const promise1 = new Promise((resolve, reject) =>{
@@ -64,10 +65,18 @@ console.log('just before subscribe');
 const testUnscb = observbls.subscribe((result)=>{
     console.log("Observables result :- ",typeof(result), result);
 });
-// const testUnscb1 = observbls.filter(item => item ==="Observables executes first time..!") //here we can filter result
-//     .subscribe((result)=>{
-//         console.log("Observables result :- ",typeof(result), result);
-//     });
+/*unsubscribe observable*/
+testUnscb.unsubscribe(); //due to this unsubscription of observables, above result will not print in outputs
+
+/*apply filter map on observables*/
+const testUnscb1 = observbls.pipe(
+    filter((item) => item ==="Observables executes first time..!"), //here we can filter result
+    map((item) => item+" ---Modified by filter and map"), //here we map the iterables and attached new string
+    reduce((acc, item) => {acc['resultIs'] = item; return acc;},{})//here we reduces the iterable/array in one value and convert to object
+);
+const subscriber = testUnscb1.subscribe((result)=>{
+    console.log("Filtered Observables- subscriber result :- ",typeof(result), result);
+})  
 // Subscriber 1
 observbls.subscribe({
     next(x) { console.log('sub1: got value ' + x); },
@@ -83,8 +92,6 @@ observbls.subscribe({
 });
 
 console.log('just after subscribe');
-/*unsubscribe observable*/
-testUnscb.unsubscribe(); //due to this unsubscribtion observables will not execute and print outputs
 
 /*
 Wrapping Array to Observable
@@ -99,5 +106,5 @@ const ArrayToObservableWrap = array => {
 const arrVal = [6, 7, 5, 4, 3, 2, 9];
 const observable22 = ArrayToObservableWrap(arrVal);
 console.log("observable22 ---", observable22);
-observable22.pipe (filter(item=>item===6).subscribe((value) => {console.log('Subscriber1: ' + value)}));
-observable22.subscribe(value => console.log('another subscriber : ' + value));
+observable22.subscribe((value) => {console.log('Subscriber1 (without timeout) : ' + value)});
+observable22.subscribe(value => console.log('subscriber2 (without timeout) : ' + value));

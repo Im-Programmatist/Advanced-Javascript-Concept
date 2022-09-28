@@ -16,11 +16,11 @@
  * Only array element is required , else index and aaray are not madetory
  */
 {/*
-    var new_array = arr.map(function callback(element, index, array) {
-        // Return value for new_array
-    }[, thisArg])
+		var new_array = arr.map(function callback(element, index, array) {
+				// Return value for new_array
+		}[, thisArg])
 
-    map(function(element, index, array) { ... }, thisArg)
+		map(function(element, index, array) { ... }, thisArg)
 */}
 
 const numbers = [1, 2, 3, 4];
@@ -32,9 +32,9 @@ const roots = numbers2.map((num) => Math.sqrt(num));
 
 /**Using map to reformat objects in an array**/
 const kvArray = [
-    { key: 1, value: 10 },
-    { key: 2, value: 20 },
-    { key: 3, value: 30 },
+		{ key: 1, value: 10 },
+		{ key: 2, value: 20 },
+		{ key: 3, value: 30 },
 ];
 const reformattedArray = kvArray.map(({ key, value}) => ({ [key]: value }));
 // reformattedArray is now [{1: 10}, {2: 20}, {3: 30}],
@@ -43,9 +43,14 @@ const reformattedArray = kvArray.map(({ key, value}) => ({ [key]: value }));
 const map = Array.prototype.map;
 const charCodes = map.call('Hello World', (x) => x.charCodeAt(0));
 // charCodes now equals [72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100]
-
-const elems = document.querySelectorAll('select option:checked');
-const values = Array.prototype.map.call(elems, ({ value }) => value);
+if (typeof window !== 'undefined') {
+		console.log('You are on the browser');
+		//below code only run in browser mode
+		const elems = document.querySelectorAll('select option:checked');
+		const values = Array.prototype.map.call(elems, ({ value }) => value);
+} else {
+		console.log('You are on the server')
+}
 
 /**
  * Filter
@@ -54,7 +59,7 @@ const values = Array.prototype.map.call(elems, ({ value }) => value);
  * If the condition returns false, the element does not get pushed to the output array.
  * parameter re same as map only element is requeired
  * let newArray = arr.filter(callback(currentValue[, index[, array]]) {
-  // return element for newArray, if true
+	// return element for newArray, if true
 }[, thisArg]);
  */
  const numbers3 = [1, 2, 3, 4];
@@ -62,14 +67,14 @@ const values = Array.prototype.map.call(elems, ({ value }) => value);
  console.log(evens); // [2, 4]
 
  const students = [
-    { name: 'Quincy', grade: 96 },
-    { name: 'Jason', grade: 84 },
-    { name: 'Alexis', grade: 100 },
-    { name: 'Sam', grade: 65 },
-    { name: 'Katie', grade: 90 }
-  ];  
-  const studentGrades = students.filter(student => student.grade >= 90);
-  console.log(studentGrades); // [ { name: 'Quincy', grade: 96 }, { name: 'Alexis', grade: 100 }, { name: 'Katie', grade: 90 } ]
+		{ name: 'Quincy', grade: 96 },
+		{ name: 'Jason', grade: 84 },
+		{ name: 'Alexis', grade: 100 },
+		{ name: 'Sam', grade: 65 },
+		{ name: 'Katie', grade: 90 }
+	];  
+	const studentGrades = students.filter(student => student.grade >= 90);
+	console.log(studentGrades); // [ { name: 'Quincy', grade: 96 }, { name: 'Alexis', grade: 100 }, { name: 'Katie', grade: 90 } ]
 
 /**
  * Reduce
@@ -78,7 +83,7 @@ const values = Array.prototype.map.call(elems, ({ value }) => value);
 Syntax
 arr.reduce(callback[, initialValue]); OR
 let newArray = arr.filter(callback(currentValue, accumulatedValue) {
-  // return the accumulated value, given the current and previous  accumulated value
+	// return the accumulated value, given the current and previous  accumulated value
 }, initialValue[, thisArg]);
 
 The callback argument is a function that will be called once for every item in the array. 
@@ -93,17 +98,17 @@ If provided, it will be used as the initial accumulator value in the first call 
 */
 const numbers5 = [1, 2, 3, 4];
 const sum = numbers5.reduce(function (result, item) {
-  return result + item;
+	return result + item;
 }, 0);
 console.log(sum); // 10
 
 var pets = ['dog', 'chicken', 'cat', 'dog', 'chicken', 'chicken', 'rabbit'];
 var petCounts = pets.reduce(function(obj, pet){
-    if (!obj[pet]) {
-        obj[pet] = 1;
-    } else {
-        obj[pet]++;
-    }
-    return obj;
+		if (!obj[pet]) {
+				obj[pet] = 1;
+		} else {
+				obj[pet]++;
+		}
+		return obj;
 }, {});
 console.log(petCounts); 

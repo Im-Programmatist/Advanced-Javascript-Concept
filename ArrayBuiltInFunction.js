@@ -3,7 +3,7 @@
      * from a start index (default 0) to an end index (default array.length)
      * syntax - fill(value, start, end)
      */
-const array1 = [1, 2, 3, 4];
+const array1 = [1, 2, 3, 4, 5, 6];
 
 // fill with 0 from position 2 until position 4
 console.log(array1.fill(0, 2, 4));// expected output: [1, 2, 0, 0]
@@ -19,15 +19,17 @@ console.log(array1.fill(6));// expected output: [6, 6, 6, 6]
  * with statement-binding purposes — allowing code that was written prior to 
  * ECMAScript 2015 to continue working as expected, rather than breaking.
 */
-var keys = [];
 
+//printing built in properties/method for array in prototype using 'with keys'
+var keys = [];
+//with method not work in strict mode
 with (Array.prototype) {
   keys.push('something');
 }
-
-console.log(Object.keys(Array.prototype[Symbol.unscopables]));
+console.log("Prototype methods of an array are(we have added key) - ",Object.keys(Array.prototype[Symbol.unscopables]), "\n");
 // ["at", "copyWithin", "entries", "fill", "find", "findIndex",
 //  "includes", "keys", "values"]
+
 
 /**
  * The @@iterator method is part of The iterable protocol, 
@@ -238,3 +240,12 @@ console.log(bb==cc);//false
 console.log(aa===bb);//false
 console.log(aa===cc);//false 
 console.log(bb===cc);//false
+
+
+const testArr = [1,2,3,4,5,6];
+const resultOfCombineArray = testArr
+  .map(item=>item* 2)
+  .filter(item=>item% 2 === 0)
+  .reduce((acc, item)=>{acc+=item;return acc;},0)
+
+console.log("\n Result of map, reduce and filter applied combine is- \t", resultOfCombineArray);
