@@ -47,7 +47,7 @@
  */
 
 //import operators
-import {mapTo, take, tap, map, max} from "rxjs/operators"
+import {mapTo, take, tap, map, min, max, filter, reduce, concat, throttle,debounceTime} from "rxjs/operators"
 //import Methods to create Observables
 import {from, of, fromEvent, interval} from 'rxjs';
 //import of Observables
@@ -90,6 +90,35 @@ var obsblCreate = Observable.create(
 obsblCreate.subscribe(function(result) {
     console.log(result);
 });
+
+let test1 = of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+let case1 = test1.pipe(
+   filter(x => x % 2 === 0),//find out even number here
+   reduce((acc, one) => acc + one, 0) //add all even number and return single output 
+)
+case1.subscribe(x => console.log(x));
+
+/**
+ * *Throttling using RxJS
+ * This operator will output as well as ignore values from the source observable for the time determined 
+   by the input function taken as an argument and the same process will be repeated.
+ * When you click on the button the first click event will be emitted, 
+   the subsequent clicks will be delayed for the time given to throttle() operator.
+*/
+//to run below code we must use it in html and all rxjs code under script tag
+// let btn = document.getElementById("btnclick");
+// let btn_clicks = fromEvent(btn, 'click');
+// let test = btn_clicks.pipe(throttle(ev => interval(2000)));
+// test.subscribe(x => console.log(x));
+
+/**
+ * *Debouncing -
+ * Concept is that - time-consuming tasks do not fire so often, that it stalls the performance of the web page
+*/
+// let btn = document.getElementById("btnclick");
+// let btn_clicks = fromEvent(btn, 'click');
+// let testDebounce = btn_clicks.pipe(debounceTime(2000));
+// testDebounce.subscribe(x => console.log(x));
 
 /* 
 If you want to learn more about Observables & difference in observables and promises 
