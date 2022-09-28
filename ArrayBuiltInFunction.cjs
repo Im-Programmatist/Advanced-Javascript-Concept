@@ -1,3 +1,4 @@
+// we have use .cjs extention to run non-strict mode and run 'with' method to get list of built in method of array prototype
 /***
      * The fill() method changes all elements in an array to a static value, 
      * from a start index (default 0) to an end index (default array.length)
@@ -29,7 +30,7 @@ with (Array.prototype) {
 console.log("Prototype methods of an array are(we have added key) - ",Object.keys(Array.prototype[Symbol.unscopables]), "\n");
 // ["at", "copyWithin", "entries", "fill", "find", "findIndex",
 //  "includes", "keys", "values"]
-
+const argument = "abc";
 
 /**
  * The @@iterator method is part of The iterable protocol, 
