@@ -41,5 +41,9 @@ globalFun();
  * CommonJS works in Node but does not work in browsers
  * ESM is supported by all modern browsers and the latest versions of Node, but does not work at all in Node versions below 12
  * Tons of the core JavaScript ecosystem tooling was developed in Node and Node only recently supported ESM, so a huge fraction of existing Node projects are in CommonJS
+ * import statements are permitted only in ES modules, but dynamic import() expressions are supported in CommonJS
+ * The CommonJS module require always treats the files it references as CommonJS.
+ * 
+ * 
 */
 
