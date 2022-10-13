@@ -101,3 +101,5 @@ console.log(Object.__proto__.__proto__);
 //A transpiler on the other hand will transform your code and replace the respective code section by other code, which can already be executed.
 //The difference is that a compiler translates to something at a lower level of abstraction, 
 //while a transpiler produces an output at a similar level of abstraction of the input.
+
+

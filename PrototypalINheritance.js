@@ -5,7 +5,7 @@
 
 /**
  *Prototype of Function and Array is in depth is Object
- //******THis is why everything in JS is Object 
+ //******This is why everything in JS is Object 
  */
 //this is default functionality provided by object
 console.log(Array.prototype); //this will be array and properties in it 
@@ -28,12 +28,12 @@ var obj1 = {
     name: "abc",
     age:"20"
 }
-obj2 = {
+var obj2 = {
     name:"xyz"
 }
 obj2.__proto__ = obj1;
 //Here we have inherited obj one property in obj1
-console.log(obj1.__proto__, "- obj1 can access age now  - ", obj2.age , 
+console.log(obj1.__proto__, "- obj2 can access age now -", obj2.age , 
 " Name has it's own property so it get overrride ", obj2.name); //obj
 
 Function.prototype.mybind = function(){
@@ -42,5 +42,5 @@ Function.prototype.mybind = function(){
 function fun(){
     console.log("Normal function...");
 }
-console.log(fun.__proto__.mybind);
-console.log(fun.__proto__.mybind());
+console.log("fun.__proto__.mybind : -",fun.__proto__.mybind);
+console.log("fun.__proto__.mybind() : -",fun.__proto__.mybind());
