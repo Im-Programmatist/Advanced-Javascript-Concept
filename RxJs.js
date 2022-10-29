@@ -8,14 +8,14 @@
  * 
  * *Features of RxJS 
  * 1. Observable - An observable is a function that creates an observer and attaches it to the source where values 
-    are expected, for example, clicks, mouse events from a dom element or an Http request.
+	are expected, for example, clicks, mouse events from a dom element or an Http request.
  * 2. Observer - It is an object with next(), error() and complete() methods, 
-    that will get called when there is interaction to the with the observable 
+	that will get called when there is interaction to the with the observable 
  * 3. Subscription - When the observable is created, to execute the observable we need to subscribe to it. 
-    It can also be used to cancel the execution.
+	It can also be used to cancel the execution.
  * 4. Operators - An operator is a pure function that takes in observable as input and the output is also an observable.
  * 5. Subject A subjec- t is an observable that can multicast i.e. talk to many observers. 
-    Consider a button with an event listener, the function attached to the event using addlistener is called every time the user clicks on the button similar functionality goes for subject too.
+	Consider a button with an event listener, the function attached to the event using addlistener is called every time the user clicks on the button similar functionality goes for subject too.
  * 6. Schedulers - A scheduler controls the execution of when the subscription has to start and notified
  * 7. pipe() method is available on the observable created.
  * 
@@ -36,20 +36,20 @@
  * 
  * *Use Of RxJS in your project
  * 1. Import RxJs and Operators
-    import { rx } from 'rxjs;
-    import { map } from 'rxjs/operators';
+	import { rx } from 'rxjs;
+	import { map } from 'rxjs/operators';
  *2. If import gives error then install ES6 module package
-    $ npm install --save-dev esm 
-    Run file using 
-    $ node -r esm file_name.js
+	$ npm install --save-dev esm 
+	Run file using 
+	$ node -r esm file_name.js
  * 3. CDN - <script src="https://unpkg.com/rxjs@7.5.7/dist/bundles/rxjs.umd.min.js"></script>
  *
  */
 
 //import operators
-import {mapTo, take, tap, map, min, max, filter, reduce, concat, throttle,debounceTime} from "rxjs/operators"
+import { mapTo, take, tap, map, min, max, filter, reduce, concat, throttle, debounceTime } from "rxjs/operators"
 //import Methods to create Observables
-import {from, of, fromEvent, interval} from 'rxjs';
+import { from, of, fromEvent, interval } from 'rxjs';
 //import of Observables
 import { Observable, UnsubscriptionError } from 'rxjs'
 //import { Observable } from 'rxjs/Observable'
@@ -57,52 +57,53 @@ import { Observable, UnsubscriptionError } from 'rxjs'
 import { Subject } from 'rxjs'
 
 let list1 = [1, 6, 15, 10, 58, 2, 40];
-from(list1).pipe(max((a,b)=>{
-        //here Linear Traversal Algorithm is used , first element in array consider as max then travers through 
-        //each element and check whether current element is greater then our considered max then replace it 
-        console.log(a,b,(a-b));
-        return a-b})
-    ).subscribe(x => console.log("The Max value is "+x)
+from(list1).pipe(max((a, b) => {
+		//here Linear Traversal Algorithm is used , first element in array consider as max then travers through 
+		//each element and check whether current element is greater then our considered max then replace it 
+		console.log(a, b, (a - b));
+		return a - b
+	})
+).subscribe(x => console.log("The Max value is " + x)
 );
 
 //Observer is an object with callback functions, that will get called when there is interaction to the Observable
 //using 'new' keyword
-var observbl = new Observable((observer)=>{
-    try{
-        //Obervavles can returns multiple values.
-        observer.next("First Observables");
-        observer.next("Second Observables");
-        observer.complete();
-    }
-    catch(e){
-        observer.error(e);
-    }
+var observbl = new Observable((observer) => {
+	try {
+		//Obervavles can returns multiple values.
+		observer.next("First Observables");
+		observer.next("Second Observables");
+		observer.complete();
+	}
+	catch (e) {
+		observer.error(e);
+	}
 
 });
-observbl.subscribe((result)=>{console.log(result);});
+observbl.subscribe((result) => { console.log("All observables result -: ",result); });
 
 //Observables using create method
 var obsblCreate = Observable.create(
-    function(observer) {
-        observer.next("Observable With create method");
-    }
+	function (observer) {
+		observer.next("Observable With create method");
+	}
 );
-obsblCreate.subscribe(function(result) {
-    console.log(result);
+obsblCreate.subscribe(function (result) {
+	console.log(result);
 });
 
 let test1 = of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 let case1 = test1.pipe(
-   filter(x => x % 2 === 0),//find out even number here
-   reduce((acc, one) => acc + one, 0) //add all even number and return single output 
+	filter(x => x % 2 === 0),//find out even number here
+	reduce((acc, one) => acc + one, 0) //add all even number and return single output 
 )
 case1.subscribe(x => console.log(x));
 
 /**
  * *Throttling using RxJS
- * This operator will output as well as ignore values from the source observable for the time determined 
+ * This operator will output as well as ignore values from the source observable for the time determined
    by the input function taken as an argument and the same process will be repeated.
- * When you click on the button the first click event will be emitted, 
+ * When you click on the button the first click event will be emitted,
    the subsequent clicks will be delayed for the time given to throttle() operator.
 */
 //to run below code we must use it in html and all rxjs code under script tag

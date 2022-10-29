@@ -32,7 +32,7 @@ console.log(x_let); // This prints 1 of global variable
  * But if you do the same for let and const, they throw a ReferenceError. 
  */
  console.log(varNumber); // undefined
- console.log(letNumber); //   throws a ReferenceError letNumber is not defined
+ //console.log(letNumber); //   throws a ReferenceError letNumber is not defined
  
  var varNumber = 1;
  let letNumber = 1;
