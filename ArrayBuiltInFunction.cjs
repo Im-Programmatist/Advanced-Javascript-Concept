@@ -24,9 +24,9 @@ console.log(array1.fill(6));// expected output: [6, 6, 6, 6]
 //printing built in properties/method for array in prototype using 'with keys'
 var keys = [];
 //with method not work in strict mode
-with (Array.prototype) {
-  keys.push('something');
-}
+// with (Array.prototype) {
+//   keys.push('something');
+// }
 console.log("Prototype methods of an array are(we have added key) - ",Object.keys(Array.prototype[Symbol.unscopables]), "\n");
 // ["at", "copyWithin", "entries", "fill", "find", "findIndex",
 //  "includes", "keys", "values"]
