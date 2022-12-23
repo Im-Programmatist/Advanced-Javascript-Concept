@@ -33,3 +33,4 @@ for(let key in a ){
 }
 
 console.log(b+'');// convert to string using ''; same as b.toString();
+console.log(f.toString()); //empty string
