@@ -17,3 +17,9 @@ console.log('Splice with 1 argument ---> ',arrSplice.splice(3,1));
 console.log('item from 4th index removed by splice and remaining parent array - ', arrSplice);
 console.log(`Splice is of array ${arrSplice} is \t ---> ${arrSplice.splice(1,2)}`);//here 2 isno of item to remove from 1 index 
 console.log('Removed item from index 1,3 and remaining array is -',arrSplice);
+
+var testarr = [{id:1,name:'chetan'},{id:2,name:'akshay'},{id:3,name:'Kunal'}];
+//remove element only one element(here second argument) from array of given index(1) which is at first & replace with last argument
+let testsplice = testarr.splice(1,1,{ids:4}); //give splice element (removed element)
+console.log(testsplice); //give splice element (removed element)
+console.log(testarr);//changed array
