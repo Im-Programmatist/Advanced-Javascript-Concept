@@ -5,6 +5,8 @@
  * but Promises.allSettled() method returns it's status as well
 */
 
+//https://dev.to/lydiahallie/javascript-visualized-promises-async-await-5gke
+
 const promise1 = new Promise(function(resolve, reject) {
     const a = 3.14*2*10;
     resolve(`promise1 :- resolved peremeter of circul is - ${a}`)
