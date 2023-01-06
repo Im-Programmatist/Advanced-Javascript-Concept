@@ -6,6 +6,7 @@
 */
 
 //https://dev.to/lydiahallie/javascript-visualized-promises-async-await-5gke
+//https://pythontutor.com/visualize.html#mode=edit
 
 const promise1 = new Promise(function(resolve, reject) {
     const a = 3.14*2*10;
