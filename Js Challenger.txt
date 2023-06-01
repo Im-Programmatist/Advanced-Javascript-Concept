@@ -1,0 +1,1 @@
+https://www.jschallenger.com/javascript-basics/booleans/lesson-truthy-falsy-javascript
