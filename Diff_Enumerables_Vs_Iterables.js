@@ -176,6 +176,33 @@ alert(arr.pop()); // World (method works)
 /**
  * Convert an object to iterable
 */
+/**BEST Way**/
+const myObject = {
+  property1: 'value1',
+  property2: 'value2',
+  property3: 'value3',
+  [Symbol.iterator]() {
+    const keys = Object.keys(this);
+    let index = 0;
+    return {
+      next: () => {
+        if (index < keys.length) {
+          const key = keys[index++];
+          return { value: this[key], done: false };
+        } else {
+          return { done: true };
+        }
+      }
+    };
+  }
+};
+
+// Iterating over the object using for...of loop
+for (let value of myObject) {
+  console.log(value);
+}
+/****/
+
 let options = {
     male: 'John',
     female: 'Gina',
