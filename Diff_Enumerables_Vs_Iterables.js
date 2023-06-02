@@ -171,3 +171,68 @@ alert(arr.pop()); // World (method works)
     *** While enumerators are used to control the iteration process and provide the next element, 
         iterables define the overall iterable behavior and provide an iterator object.
 */
+
+
+/**
+ * Convert an object to iterable
+*/
+let options = {
+    male: 'John',
+    female: 'Gina',
+    rel: 'Love',
+    [Symbol.iterator]: function * () {
+        for (let key in this) {
+            // yield [key, this[key]]       // yield [key, value] pair same like Object.entries(options)
+            // yield this[key]              //Only Values
+            // yield key                    //Only Keys
+            yield [key, this[key]] 
+        }
+    }
+}
+for(let key of options) {
+    console.log('this', key);
+}
+console.log(Object.keys(options), Object.values(options), Object.entries(options));
+/*for of on Object.Keys array*/
+for(let k of Object.keys(options)) {
+    console.log(`Property ${k}, ${options[k]}`);
+};
+
+/***/
+const objct = {
+    [Symbol.iterator]() {
+      let i = 0;
+      return {
+        next() {
+          i++;
+          console.log("Returning", i);
+          if (i === 3) return { done: true, value: i };
+          return { done: false, value: i };
+        },
+        return() {
+          console.log("Closing");
+          return { done: true };
+        },
+      };
+    },
+  };
+  
+  const [bbb] = objct;
+  // Returning 1
+  // Closing
+  
+  const [aaa, b, c] = objct;
+  // Returning 1
+  // Returning 2
+  // Returning 3
+  // Already reached the end (the last call returned `done: true`),
+  // so `return` is not called
+  
+ for (const bbb of objct) {
+    console.log('bbb', bbb);
+    // break;
+  }
+  // Returning 1
+  // Closing
+  
+/***/
