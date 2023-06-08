@@ -7,7 +7,7 @@
     - Example: Enumerating over the properties of an object using a for...in loop
 
  * Iterables: 
-    - Iterables are objects that implement the iterable protocol., aallow them to be iterated over using the for...of loop  or other iterable-consumer methods.
+    - Iterables are objects that implement the iterable protocol., allow them to be iterated over using the for...of loop  or other iterable-consumer methods.
     - They define a method called [Symbol.iterator] that returns an iterator object.
     - Iterators provide a way to traverse a collection one element at a time.
     - Iterables are used with various built-in JavaScript objects like arrays, strings, maps, sets, etc., and can define their own custom iteration behavior.
