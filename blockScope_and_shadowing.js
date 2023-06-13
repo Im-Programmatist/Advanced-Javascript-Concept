@@ -43,3 +43,19 @@ Block Scope and Shadowing</title>
         console.log('outside block b : ', b); // error
         console.log('outside block c : ', c); // not run as pointer stop at b because it is let variable and not in scope
         
+/*The time required to run this code in Google Chrome is considerably more than the time required to run it in Node.js. 
+Explain why this is so, even though both use the v8 JavaScript Engine. */
+{
+    console.time("loop");
+    for (let i = 0; i < 1000000; i += 1){
+        // Do nothing
+    }
+    console.timeEnd("loop");
+}
+/**
+ * Answer --->
+ * 1. Within a web browser such as Chrome, declaring the variable i outside of any function’s scope makes it global and therefore binds it as a property of the window object. 
+ * 2. running this code in a web browser requires repeatedly resolving the property i within the heavily populated window namespace in each iteration of the for loop.
+ * 3. In Node.js, however, declaring any variable outside of any function’s scope binds it only to the module’s own scope (not the window object) which therefore makes it much easier and faster to resolve.
+ * 4. We can reduce run time by 50% if we use let instead of var in loop, let will be in local scope  so it will take same time in browser and node env
+*/
