@@ -4,6 +4,9 @@
  * a generator function, which returns a Generator object.
  */
 
+// Generators are functions that can be exited and later re-entered. 
+// Their context (variable bindings) will be saved across re-entrances.
+
 //Generators are functions that can be exited and later re-entered. 
 //Their context (variable bindings) will be saved across re-entrances.
 

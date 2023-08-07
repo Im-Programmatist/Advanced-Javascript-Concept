@@ -10,6 +10,7 @@
  * A polyfill provides the functions and features that the developer expects the browser to offer by default. 
  * Basically, using polyfill wanted a term to describe reproducing an API using JavaScript (or Flash or whatever), 
  * if the browser does not have it natively
+ * A polyfill is a piece of code (usually JavaScript on the Web) used to provide modern functionality on older browsers that do not natively support it.
  */
 
 //We can polyfill anything using prototype
