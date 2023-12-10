@@ -40,3 +40,15 @@ async function generate() {
 
 generate();
 // expected output: "abc"
+
+function* getEvenNumber(arr) {
+    for(let i=0; i<arr.length; i++) {
+        if(arr[i]%2 === 0) yield arr[i];
+    }
+}
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const filteredNumbers = getEvenNumber(numbers);
+console.log(filteredNumbers.next().value);
+for(const a of filteredNumbers){
+    console.log(a);
+}

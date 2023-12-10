@@ -1,8 +1,9 @@
-/**there are two types of method we can use to combine all the promises 
- * 1. Promise.all([]); 2. Promise.allSettled([])
+/**there are three types of method we can use to combine all the promises 
+ * 1. Promise.all([]); 2. Promise.allSettled([]); 3. Promise.any([]);
  * Both receive array param with prmises as item
  * Only difference is, Promises.all() return promises whether fullfill or reject,
- * but Promises.allSettled() method returns it's status as well
+ * but Promises.allSettled() method returns it's fullfill or reject with status as well
+ * promise.any used to get any one of the promise resolved
 */
 
 const promise1 = new Promise(function(resolve, reject) {
@@ -45,3 +46,56 @@ async function executePromise(){
 }
 executePromise(); 
 
+function abc(state){
+    return new Promise((resolve, reject)=>{
+        if(state){
+            resolve("success");
+        }else{
+            reject("fail");
+        }
+    })
+}
+const promise = abc(true);//if false
+//if true - promise get resolve and execute all then functions
+//if false - then promise get reject and first catch block will execute and after that all then function(not next catch block)
+promise.then(()=>{
+    console.log("Success 1");
+}).then(()=>{
+    console.log("Success 2");
+}).then(()=>{
+    console.log("Success 3");
+}).catch(()=>{
+    console.log("error 1");
+}).then(()=>{
+    console.log("Success 4");
+}).then(()=>{
+    console.log("Success 5");
+}).catch(()=>{
+    console.log("error 2");
+})
+
+// promise.any
+const api1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('a')
+    }, 10000);
+})
+const api2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('b')
+    }, 1000);
+})
+const api3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject('c')
+    }, 1000);
+    
+})
+
+const p = Promise.any([api1, api2, api3])
+  p.then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
