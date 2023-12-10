@@ -202,11 +202,20 @@ const reversed = arra1.reverse();
 console.log('reversed:', reversed);
 
 /**
- * unshift() method adds one or more elements to the beginning of an array and returns the new length of the array
+ * unshift() 
+ * method adds one or more elements to the beginning of an array and returns the new length of the array
 */
 const aay1 = [1, 2, 3];
 console.log(aay1.unshift(4, 5));
 console.log(array1); //[4,5,1,2,3]
+
+/**
+ * shift()
+ * This method is targeted at extracting and returning the first element of the array.
+*/
+let lang = ["Html", "Css", "Javascript"];
+console.log(lang.shift()); // remove Html and show it
+console.log(lang); // Css, Javascript
 
 /**
  * slice() method returns a shallow copy of a portion of an array into a new array object 
@@ -250,3 +259,27 @@ const resultOfCombineArray = testArr
   .reduce((acc, item)=>{acc+=item;return acc;},0)
 
 console.log("\n Result of map, reduce and filter applied combine is- \t", resultOfCombineArray);
+
+/**
+ * Create multi-dimensional array in js
+ * 1. Array Literal Notation - 
+    let arr = new Array(m); // create an empty array of length n
+    for (var i = 0; i < m; i++) {
+      arr[i] = new Array(n); // make each element an array
+    }
+
+    2. The Array.from() method
+    let arr = Array.from(Array(m), () => new Array(n));
+
+    3. The Array.prototype.map()Method
+    let arr = Array(m).fill().map(() => Array(n));
+*/
+let multArray1 =  Array.from(Array(4), _ => Array(5).fill(0));
+let multArray2 = Array(4).fill(0).map(() => Array(5).fill(0));
+let multArray3 = new Array(4); // create an empty array of length n
+for (var i = 0; i < 4; i++) {
+  arr[i] = new Array(5); // make each element an array
+}
+console.table(multArray1);
+console.table(multArray2);
+console.table(multArray3);

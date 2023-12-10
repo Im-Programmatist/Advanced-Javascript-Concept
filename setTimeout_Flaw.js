@@ -13,6 +13,16 @@
 
     clearTimeout(myTimeout);
  */
+
+/*Simple example of settimeout */
+//1. settimeout returns identifier once run , we can clear timeout like interval using identifier
+//2. we can pass param to unknown/anonymous function using extra param except timer value
+//here 'timeout' is identifier 
+const timeout = setTimeout(function(str1, str2) {
+    console.log(str1 + " " + str2);
+}, 3000, "Hi.", "welcome to code world!");
+clearTimeout(timeout);
+
 var setInt = setInterval(function () { console.log('SetInterval Hello' ); }, 1000);//repeat after 1 sec
 var setTime = setTimeout(function () { console.log('setTimeout Hello' ); }, 1000);// only once run
 

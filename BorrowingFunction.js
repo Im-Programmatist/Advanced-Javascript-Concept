@@ -14,11 +14,11 @@
         fname: "Chetan",
         lname: "Patil",
         showName: function(age,a,b){
-            console.log("extra param passed :",a,b);
+            console.log("extra param passed :",age,a,b);
             console.log(`His name is ${this.fname} ${this.lname} & he is ${age} year old`);
         }
     };
-    person1.showName(18,"",""); /*Output: His name is Chetan Patil*/
+    person1.showName(18,"",""); /*Output: His name is Chetan Patil  & he is 18 year old*/
     /**
      * Object 2 - not have function so, this function is not able to call showName
      */
@@ -30,8 +30,8 @@
     
     /**
      * Here we can use function borrowing
-     * Call/apply call the function immediately, whereas bind returns a function that, when later executed.
-     * All methods attach `this` into function (or object) and the difference is in the function invocation
+     * Call/apply call the function immediately, whereas bind returns a function that can be executed later.
+     * All methods attach `this` into function (or object) and the difference is in the function invocation & way of accepting parameter 
      * /
      * 
     /**
@@ -41,8 +41,8 @@
      * /
     /*Using the call() method*/
     person1.showName.call(person2,19,"call",[1,2,3,4]); //Output: He is 22 years old with extra param 
-    person1.showName.call({ fname: "Akshay", lname:"Korde call method" }, 20);//pass ontime object to call like person2
-    //We can not store call function and later call as it imediately call the function 
+    person1.showName.call({ fname: "Akshay", lname:"Korde call method" }, 20);//pass on time object to call like person2
+    //We can not store call function and later call as it immediately call the function 
     // var showFuncCall = person1.showName.call({ fname: "Akshay", lname:"Korde call method" });
     //showFuncCall(20);
     
@@ -59,7 +59,7 @@
     var showFuncBind = person1.showName.bind({ fname: "Akshay", lname:"Korde bind method" });
     showFuncBind(24);
     //But if we pass this object function as call back function,
-    //'this' reference goes out of context for the function and can not use valiable declare in object
+    //'this' reference goes out of context for the function and can not use variable declare in object
     setTimeout(person1.showName, 3000); //output - His name is undefined undefined & he is undefined year old
     //to overcome this we have to bind objects with method
     let display = person1.showName.bind({fname: "set", lname:"timeout" });

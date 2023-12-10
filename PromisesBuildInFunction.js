@@ -6,6 +6,9 @@
  * promise.any used to get any one of the promise resolved
 */
 
+//https://dev.to/lydiahallie/javascript-visualized-promises-async-await-5gke
+//https://pythontutor.com/visualize.html#mode=edit
+
 const promise1 = new Promise(function(resolve, reject) {
     const a = 3.14*2*10;
     resolve(`promise1 :- resolved peremeter of circul is - ${a}`)
